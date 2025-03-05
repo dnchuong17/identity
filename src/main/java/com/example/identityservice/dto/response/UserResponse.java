@@ -1,25 +1,19 @@
-package com.example.identityservice.entity;
+package com.example.identityservice.dto.response;
 
-import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 import java.util.Set;
 
-@Getter
-@Setter
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //generate id for user random and never duplicate
+public class UserResponse {
     long id;
     String username;
-    String password;
     String firstName;
     String lastName;
     LocalDate dob;
