@@ -29,7 +29,7 @@ public class AuthenticationService {
         boolean authenticated = passwordEncoder.matches(login.getPassword(), user.getPassword());
 
         if (!authenticated) {
-            throw new AppException(ErrorCode.UNAUTHORIZED);
+            throw new AppException(ErrorCode.UNAUTHENTICATED);
         }
 
         var token = jwtUtil.generateToken(user);
