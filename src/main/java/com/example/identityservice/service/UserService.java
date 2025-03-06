@@ -7,6 +7,7 @@ import com.example.identityservice.enums.Roles;
 import com.example.identityservice.exeption.AppException;
 import com.example.identityservice.exeption.ErrorCode;
 import com.example.identityservice.mapper.UserMapper;
+import com.example.identityservice.repository.RoleRepository;
 import com.example.identityservice.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class UserService {
     UserRepository userRepository;
+    RoleRepository roleRepository;
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
 
@@ -67,10 +69,9 @@ public class UserService {
         User user = userMapper.toUser(userDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        HashSet<String> roles = new HashSet<>();
-        roles.add(Roles.USER.name());
+        var roles = roleRepository.findAllById(userDto.getRoles());
 
-        user.setRoles(roles);
+        user.setRoles(new HashSet<>(roles));
 
         return userRepository.save(user);
     }

@@ -10,7 +10,10 @@ import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
+    @Mapping(target = "roles", ignore = true)
     User toUser(UserDto userDto);
     UserResponse toUserResponse(User user);
+
+    @Mapping(target = "roles", ignore = true)
     void userUpdate(@MappingTarget User user, UserDto userDto);
 }
