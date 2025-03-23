@@ -4,15 +4,18 @@ server:
     context-path: /identity
 spring:
   datasource:
-    url: ${JDBC_DATABASE_URL}
-    driverClassName: ${JDBC_DATABASE_DRIVER}
-    username: ${JDBC_DATABASE_USERNAME}
-    password: ${JDBC_DATABASE_PASSWORD}
+    url: ${JDBC_DATABASE_URL:jdbc:mysql://127.0.0.1:3307/identity_service}
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+    username: ${JDBC_DATABASE_USERNAME:root}
+    password: ${JDBC_DATABASE_PASSWORD:123456}
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     open-in-view: false
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+
 jwt:
   signerKey: "hrp3kHihWpRofMCfXC8H2OYqM7SHrt3eBMG6+Rxyys0rD2F0cT6zTkAgFtW6gBU4"
 token:
