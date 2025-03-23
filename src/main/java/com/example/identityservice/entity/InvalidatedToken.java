@@ -1,11 +1,9 @@
 package com.example.identityservice.entity;
 
-import java.util.Set;
+import java.util.Date;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -17,12 +15,9 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class Role {
+public class InvalidatedToken {
     @Id
-    String name;
+    String id;
 
-    String description;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    Set<Permission> permissions;
+    Date expiryTime;
 }

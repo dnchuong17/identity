@@ -1,0 +1,3 @@
+token:
+  accessTokenExpiryTime: 1
+  refreshTokenExpiryTime: 48

@@ -1,12 +1,12 @@
 package com.example.identityservice.dto.response;
 
-import com.example.identityservice.entity.Role;
-import jakarta.persistence.ManyToMany;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
 import java.time.LocalDate;
 import java.util.Set;
+
+import com.example.identityservice.entity.Role;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @NoArgsConstructor
@@ -20,5 +20,5 @@ public class UserResponse {
     String lastName;
     LocalDate dob;
 
-    Set<RoleResponse> roles;
+    Set<Role> roles;
 }

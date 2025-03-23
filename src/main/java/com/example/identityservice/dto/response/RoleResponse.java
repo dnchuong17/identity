@@ -1,10 +1,9 @@
 package com.example.identityservice.dto.response;
 
+import java.util.Set;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -16,4 +15,3 @@ public class RoleResponse {
     String description;
     Set<PermissionResponse> permissions;
 }
-

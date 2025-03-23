@@ -1,21 +1,21 @@
 package com.example.identityservice.service;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
 
 import com.example.identityservice.dto.request.RoleDto;
 import com.example.identityservice.dto.response.RoleResponse;
 import com.example.identityservice.mapper.RoleMapper;
 import com.example.identityservice.repository.PermissionRepository;
 import com.example.identityservice.repository.RoleRepository;
+
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
@@ -40,11 +40,8 @@ public class RoleService {
 
     public List<RoleResponse> getAllRoles() {
         var roles = roleRepository.findAll();
-        return roles.stream()
-                .map(roleMapper::toRoleResponse)
-                .collect(Collectors.toList());
+        return roles.stream().map(roleMapper::toRoleResponse).collect(Collectors.toList());
     }
-
 
     public void deleteRole(String role) {
         roleRepository.deleteById(role);

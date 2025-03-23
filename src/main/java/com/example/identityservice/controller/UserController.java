@@ -1,19 +1,21 @@
 package com.example.identityservice.controller;
 
+import java.util.List;
+
+import jakarta.validation.Valid;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
+
 import com.example.identityservice.dto.request.ApiResponse;
 import com.example.identityservice.dto.request.UserDto;
 import com.example.identityservice.dto.response.UserResponse;
-import com.example.identityservice.entity.User;
 import com.example.identityservice.service.UserService;
-import jakarta.validation.Valid;
+
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -41,13 +43,11 @@ public class UserController {
     }
 
     @PostMapping
-    ApiResponse<User> createUser(@RequestBody @Valid UserDto userDto) {
-        ApiResponse<User> apiResponse = new ApiResponse<>();
-        User user = userService.createUser(userDto);
-        apiResponse.setResult(user);
-        return  apiResponse;
+    ApiResponse<UserResponse> createUser(@RequestBody @Valid UserDto userDto) {
+        return ApiResponse.<UserResponse>builder()
+                .result(userService.createUser(userDto))
+                .build();
     }
-
 
     @PutMapping("/{userId}")
     UserResponse updateUser(@RequestBody UserDto userDto, @PathVariable Long userId) {
@@ -59,5 +59,4 @@ public class UserController {
         userService.deleteUser(userId);
         return "Deleted user with id: " + userId;
     }
-
 }
